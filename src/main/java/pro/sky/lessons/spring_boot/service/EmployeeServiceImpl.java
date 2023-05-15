@@ -1,38 +1,70 @@
 package pro.sky.lessons.spring_boot.service;
 
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 import pro.sky.lessons.spring_boot.abstraction.EmployeeService;
 import pro.sky.lessons.spring_boot.model.Employee;
-import pro.sky.lessons.spring_boot.repository.Repository;
+import pro.sky.lessons.spring_boot.repository.EmployeeRepository;
 
+import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    private final Repository repository;
+    private final EmployeeRepository employeeRepository;
 
-    public EmployeeServiceImpl(Repository repository) {
-        this.repository = repository;
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
-    public Employee getOldestEmployee() {
-        return repository.findEmployeeWithMaxAge();
+    public void addEmployee(Employee[] employees) {
+        employeeRepository.saveAll(Arrays.asList(employees));
     }
 
     @Override
-    public Employee getYoungestEmployee() {
-        return repository.findEmployeeWithLowestAge();
+    @SneakyThrows
+    public void updateEmployee(long id, Employee employee) {
+        employeeRepository.findById(id).orElseThrow(SQLException::new);
+        employee.setId(id);
+        employeeRepository.save(employee);
+    }
+
+    @Override
+    @SneakyThrows
+    public Employee getEmployeeById(long id) {
+        return employeeRepository.findById(id).orElseThrow(SQLException::new);
+    }
+
+    @Override
+    public void deleteEmployee(long id) {
+        employeeRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Employee> getEmployeesOlderThan(int age) {
+        return employeeRepository.findEmployeeByAgeIsAfter(age);
+    }
+
+    @Override
+    public List<Employee> getOldestEmployee() {
+        return employeeRepository.findEmployeeWithMaxAge();
+    }
+
+    @Override
+    public List<Employee>  getYoungestEmployee() {
+        return employeeRepository.findEmployeeWithLowestAge();
     }
 
     @Override
     public List<Employee> getEmployeesOlderAverage() {
-        return repository.findEmployeeWithAgeOverAverage();
+        return employeeRepository.findEmployeeWithAgeOverAverage();
     }
 
     @Override
     public Integer getAgeSum() {
-        return repository.getSumOfAge();
+        return employeeRepository.getSumOfAge();
     }
 }
