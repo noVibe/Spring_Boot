@@ -6,7 +6,6 @@ import pro.sky.lessons.spring_boot.abstraction.EmployeeService;
 import pro.sky.lessons.spring_boot.model.Employee;
 import pro.sky.lessons.spring_boot.repository.EmployeeRepository;
 
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @SneakyThrows
     public void updateEmployee(long id, Employee employee) {
-        employeeRepository.findById(id).orElseThrow(SQLException::new);
+        employeeRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         employee.setId(id);
         employeeRepository.save(employee);
     }
@@ -35,7 +34,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @SneakyThrows
     public Employee getEmployeeById(long id) {
-        return employeeRepository.findById(id).orElseThrow(SQLException::new);
+        return employeeRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
     @Override

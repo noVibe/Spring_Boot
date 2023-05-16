@@ -13,4 +13,9 @@ public class ExceptionHandling {
     public ResponseEntity<?> handleSQLException(SQLException sqlException) {
         return new ResponseEntity<>(sqlException.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<?> handleIllegalArgumentException(IllegalArgumentException sqlException) {
+        return new ResponseEntity<>(sqlException.getMessage(), HttpStatus.I_AM_A_TEAPOT);
+    }
 }

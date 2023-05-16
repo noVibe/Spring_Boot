@@ -8,6 +8,7 @@ import java.util.List;
 
 
 public interface EmployeeRepository extends CrudRepository<Employee, Long> {
+
     @Query("select e from Employee e where e.age = (select max(age) from Employee)")
     List<Employee> findEmployeeWithMaxAge();
 
@@ -19,8 +20,6 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
     @Query("select e from Employee e where e.age > (select avg(age) from Employee)")
     List<Employee> findEmployeeWithAgeOverAverage();
-
-    void deleteById(long id);
 
     List<Employee> findEmployeeByAgeIsAfter(int age);
 

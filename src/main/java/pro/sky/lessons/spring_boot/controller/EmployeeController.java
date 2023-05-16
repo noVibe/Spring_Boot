@@ -35,7 +35,7 @@ public class EmployeeController {
         return employeeService.getEmployeesOlderThan(age);
     }
     @DeleteMapping("/{id}")
-    public void removeEmployeeById(@PathVariable int id) {
+    public void deleteEmployeeById(@PathVariable int id) {
         employeeService.deleteEmployee(id);
     }
 
