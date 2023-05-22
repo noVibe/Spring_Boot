@@ -6,11 +6,21 @@ import pro.sky.lessons.spring_boot.model.Employee;
 import java.util.List;
 
 public interface EmployeeService {
-     Employee getOldestEmployee();
+    void addEmployee(Employee... employees);
 
-     Employee getYoungestEmployee();
+    void updateEmployee(long id, Employee employee);
 
-     List<Employee> getEmployeesOlderAverage();
+    Employee getEmployeeById(long id);
 
-     Integer getAgeSum();
+    void deleteEmployee(long id);
+
+    List<Employee> getEmployeesOlderThan(int age);
+
+    List<Employee> getOldestEmployee();
+
+    List<Employee> getYoungestEmployee();
+
+    List<Employee> getEmployeesOlderAverage();
+
+    Integer getAgeSum();
 }
