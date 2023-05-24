@@ -4,10 +4,12 @@ package pro.sky.lessons.spring_boot.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.Accessors;
 
 @Entity
 @Table(name = "employee")
 @Data
+@Accessors(chain = true)
 @RequiredArgsConstructor
 public class Employee {
     @Id
@@ -23,18 +25,9 @@ public class Employee {
     private Integer age;
     @Column(name = "city_id")
     private Integer cityId;
+    @ManyToOne
+    @JoinColumn(name = "position_id")
+    private Position position;
 
 
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", gender='" + gender + '\'' +
-                ", age=" + age +
-                ", cityId=" + cityId +
-                '}';
-    }
 }

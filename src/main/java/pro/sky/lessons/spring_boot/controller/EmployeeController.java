@@ -2,7 +2,9 @@ package pro.sky.lessons.spring_boot.controller;
 
 import org.springframework.web.bind.annotation.*;
 import pro.sky.lessons.spring_boot.abstraction.EmployeeService;
-import pro.sky.lessons.spring_boot.model.Employee;
+import pro.sky.lessons.spring_boot.dto.EmployeeInDTO;
+import pro.sky.lessons.spring_boot.dto.EmployeeOutDTO;
+import pro.sky.lessons.spring_boot.projection.EmployeeView;
 
 import java.util.List;
 
@@ -16,22 +18,32 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    public void addNewEmployees(@RequestBody Employee... employees) {
+    public void addNewEmployees(@RequestBody EmployeeInDTO... employees) {
         employeeService.addEmployee(employees);
     }
 
     @PutMapping("/{id}")
-    public void editEmployee(@PathVariable long id, @RequestBody Employee employee) {
+    public void editEmployee(@PathVariable long id, @RequestBody EmployeeInDTO employee) {
         employeeService.updateEmployee(id, employee);
     }
 
     @GetMapping("/{id}")
-    public Employee getEmployee(@PathVariable int id) {
+    public EmployeeView getEmployee(@PathVariable int id) {
         return employeeService.getEmployeeById(id);
     }
 
+    @GetMapping("/page")
+    public List<EmployeeOutDTO> getEmployeesPage(@RequestParam(name = "page") int page, @RequestParam(name = "size", defaultValue = "10") int size) {
+        return employeeService.getEmployeesWithPaging(page, size);
+    }
+
+    @GetMapping()
+    public List<EmployeeOutDTO> getEmployeeByPosition(@RequestParam(name = "position", required = false) Long position) {
+        return employeeService.getEmployeesWithPosition(position);
+    }
+
     @GetMapping("/olderThan")
-    public List<Employee> getEmployeesOlderThan(@RequestParam (name = "age") int age) {
+    public List<EmployeeOutDTO> getEmployeesOlderThan(@RequestParam (name = "age") int age) {
         return employeeService.getEmployeesOlderThan(age);
     }
     @DeleteMapping("/{id}")
@@ -40,17 +52,17 @@ public class EmployeeController {
     }
 
     @GetMapping("/youngest")
-    public List<Employee> getYoungestEmployee() {
+    public List<EmployeeOutDTO> getYoungestEmployee() {
         return employeeService.getYoungestEmployee();
     }
 
     @GetMapping("/oldest")
-    public List<Employee> getOldestEmployee() {
+    public List<EmployeeOutDTO> getOldestEmployee() {
         return employeeService.getOldestEmployee();
     }
 
     @GetMapping("/overAverage")
-    public List<Employee> getEmployeesOlderThanAverage() {
+    public List<EmployeeOutDTO> getEmployeesOlderThanAverage() {
         return employeeService.getEmployeesOlderAverage();
     }
 
