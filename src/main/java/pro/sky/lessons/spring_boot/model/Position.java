@@ -19,8 +19,8 @@ public class Position {
     private Long id;
 
     @Column(name = "position_name")
-    String positionName;
+    private String positionName;
 
     @OneToMany(targetEntity = Employee.class)
-    List<Employee> employeeList;
+    private List<Employee> employeeList;
 }
