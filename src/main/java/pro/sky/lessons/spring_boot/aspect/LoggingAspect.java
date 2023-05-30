@@ -1,11 +1,10 @@
 package pro.sky.lessons.spring_boot.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
-import pro.sky.lessons.spring_boot.service.EmployeeServiceImpl;
+import pro.sky.lessons.spring_boot.service.employee.EmployeeServiceImpl;
 
 import java.util.logging.Logger;
 
