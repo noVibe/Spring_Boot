@@ -1,9 +1,9 @@
-package pro.sky.lessons.spring_boot.controller;
+package pro.sky.lessons.spring_boot.controller.employee;
 
 import org.springframework.web.bind.annotation.*;
 import pro.sky.lessons.spring_boot.abstraction.EmployeeService;
-import pro.sky.lessons.spring_boot.dto.EmployeeInDTO;
-import pro.sky.lessons.spring_boot.dto.EmployeeOutDTO;
+import pro.sky.lessons.spring_boot.dto.employee_dto.EmployeeInDTO;
+import pro.sky.lessons.spring_boot.dto.employee_dto.EmployeeOutDTO;
 import pro.sky.lessons.spring_boot.projection.EmployeeView;
 
 import java.util.List;

@@ -1,8 +1,8 @@
 package pro.sky.lessons.spring_boot.abstraction;
 
 
-import pro.sky.lessons.spring_boot.dto.EmployeeInDTO;
-import pro.sky.lessons.spring_boot.dto.EmployeeOutDTO;
+import pro.sky.lessons.spring_boot.dto.employee_dto.EmployeeInDTO;
+import pro.sky.lessons.spring_boot.dto.employee_dto.EmployeeOutDTO;
 import pro.sky.lessons.spring_boot.projection.EmployeeView;
 
 import java.util.List;

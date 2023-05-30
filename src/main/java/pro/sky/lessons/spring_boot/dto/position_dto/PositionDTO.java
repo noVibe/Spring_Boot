@@ -1,4 +1,4 @@
-package pro.sky.lessons.spring_boot.dto;
+package pro.sky.lessons.spring_boot.dto.position_dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

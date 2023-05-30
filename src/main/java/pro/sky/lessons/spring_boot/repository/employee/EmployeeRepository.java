@@ -1,4 +1,4 @@
-package pro.sky.lessons.spring_boot.repository;
+package pro.sky.lessons.spring_boot.repository.employee;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

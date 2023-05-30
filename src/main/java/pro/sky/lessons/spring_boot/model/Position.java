@@ -20,7 +20,7 @@ public class Position {
 
     @Column(name = "position_name")
     String positionName;
-    @OneToMany(targetEntity = Employee.class)
 
+    @OneToMany(targetEntity = Employee.class)
     List<Employee> employeeList;
 }

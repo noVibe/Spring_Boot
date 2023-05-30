@@ -1,36 +1,39 @@
-package pro.sky.lessons.spring_boot.dto;
+package pro.sky.lessons.spring_boot.dto.employee_dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import pro.sky.lessons.spring_boot.dto.position_dto.PositionDTO;
 import pro.sky.lessons.spring_boot.model.Employee;
-import pro.sky.lessons.spring_boot.model.Position;
 @Data
 @Accessors(chain = true)
-public class EmployeeInDTO {
+public class EmployeeOutDTO {
+    private Long id;
     private String firstName;
     private String lastName;
     private String gender;
     private int age;
     private Integer cityId;
-    private Long positionId;
+    private PositionDTO positionDTO;
 
-    public static EmployeeInDTO fromEmployee(Employee employee) {
-        return new EmployeeInDTO()
+    public static EmployeeOutDTO fromEmployee(Employee employee) {
+        return new EmployeeOutDTO()
+                .setId(employee.getId())
                 .setFirstName(employee.getFirstName())
                 .setLastName(employee.getLastName())
                 .setGender(employee.getGender())
                 .setAge(employee.getAge())
                 .setCityId(employee.getCityId())
-                .setPositionId(employee.getPosition().getId());
+                .setPositionDTO(PositionDTO.fromPosition(employee.getPosition()));
     }
 
     public Employee toEmployee() {
         return new Employee()
+                .setId(id)
                 .setFirstName(firstName)
                 .setLastName(lastName)
                 .setGender(gender)
                 .setAge(age)
                 .setCityId(cityId)
-                .setPosition(new Position().setId(positionId));
+                .setPosition(positionDTO.toPosition());
     }
 }

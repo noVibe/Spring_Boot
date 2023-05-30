@@ -1,17 +1,17 @@
-package pro.sky.lessons.spring_boot.service;
+package pro.sky.lessons.spring_boot.service.employee;
 
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pro.sky.lessons.spring_boot.abstraction.EmployeeService;
-import pro.sky.lessons.spring_boot.dto.EmployeeInDTO;
-import pro.sky.lessons.spring_boot.dto.EmployeeOutDTO;
+import pro.sky.lessons.spring_boot.dto.employee_dto.EmployeeInDTO;
+import pro.sky.lessons.spring_boot.dto.employee_dto.EmployeeOutDTO;
 import pro.sky.lessons.spring_boot.exceptions.IdNotFound;
 import pro.sky.lessons.spring_boot.model.Employee;
 import pro.sky.lessons.spring_boot.projection.EmployeeView;
-import pro.sky.lessons.spring_boot.repository.EmployeeRepository;
-import pro.sky.lessons.spring_boot.repository.PagingEmployee;
+import pro.sky.lessons.spring_boot.repository.employee.EmployeeRepository;
+import pro.sky.lessons.spring_boot.repository.employee.PagingEmployee;
 
 import java.util.*;
 import java.util.stream.Collectors;
