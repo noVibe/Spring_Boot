@@ -18,9 +18,4 @@ public class ExceptionHandling {
     public ResponseEntity<?> handleIllegalArgumentException(IllegalArgumentException sqlException) {
         return new ResponseEntity<>(sqlException.getMessage(), HttpStatus.I_AM_A_TEAPOT);
     }
-
-    @ExceptionHandler
-    ResponseEntity<?> handleNoIdFoundException(IdNotFound e) {
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-    }
 }

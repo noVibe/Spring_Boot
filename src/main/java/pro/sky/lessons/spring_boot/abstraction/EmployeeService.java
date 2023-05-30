@@ -1,30 +1,26 @@
 package pro.sky.lessons.spring_boot.abstraction;
 
 
-import pro.sky.lessons.spring_boot.dto.employee_dto.EmployeeInDTO;
-import pro.sky.lessons.spring_boot.dto.employee_dto.EmployeeOutDTO;
-import pro.sky.lessons.spring_boot.projection.EmployeeView;
+import pro.sky.lessons.spring_boot.model.Employee;
 
 import java.util.List;
 
 public interface EmployeeService {
-    void addEmployee(EmployeeInDTO... employees);
+    void addEmployee(Employee... employees);
 
-    void updateEmployee(long id, EmployeeInDTO employee);
+    void updateEmployee(long id, Employee employee);
 
-    EmployeeView getEmployeeById(long id);
+    Employee getEmployeeById(long id);
 
     void deleteEmployee(long id);
 
-    List<EmployeeOutDTO> getEmployeesOlderThan(int age);
-    List<EmployeeOutDTO> getEmployeesWithPosition(Long positionId);
-    List<EmployeeOutDTO> getEmployeesWithPaging(int pageIndex, int unitsPerPage);
+    List<Employee> getEmployeesOlderThan(int age);
 
-    List<EmployeeOutDTO> getOldestEmployee();
+    List<Employee> getOldestEmployee();
 
-    List<EmployeeOutDTO> getYoungestEmployee();
+    List<Employee> getYoungestEmployee();
 
-    List<EmployeeOutDTO> getEmployeesOlderAverage();
+    List<Employee> getEmployeesOlderAverage();
 
     Integer getAgeSum();
 }
