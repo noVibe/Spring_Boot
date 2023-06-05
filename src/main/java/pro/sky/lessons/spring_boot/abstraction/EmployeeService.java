@@ -21,6 +21,7 @@ public interface EmployeeService {
     List<EmployeeOutDTO> getEmployeesWithPaging(int pageIndex, int unitsPerPage);
 
     List<EmployeeOutDTO> getOldestEmployee();
+    List<EmployeeOutDTO> getAll();
 
     List<EmployeeOutDTO> getYoungestEmployee();
 

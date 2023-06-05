@@ -89,4 +89,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Integer getAgeSum() {
         return employeeRepository.getSumOfAge();
     }
+
+    @Override
+    public List<EmployeeOutDTO> getAll() {
+        var list = new ArrayList<EmployeeOutDTO>();
+        employeeRepository.findAll().forEach(x -> list.add(EmployeeOutDTO.fromEmployee(x)));
+        return list;
+    }
 }
