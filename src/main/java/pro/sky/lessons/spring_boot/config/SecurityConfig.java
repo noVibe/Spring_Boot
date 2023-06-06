@@ -7,10 +7,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
@@ -21,20 +24,18 @@ import static pro.sky.lessons.spring_boot.enums.Role.*;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf()
-                .disable()
-                .authorizeHttpRequests(this::customiseRequest);
-        return http.build();
+        return http.csrf(AbstractHttpConfigurer::disable)
+                .addFilter(new DefaultLoginPageGeneratingFilter(new UsernamePasswordAuthenticationFilter()))
+                .formLogin(loginConfigurer -> loginConfigurer.loginPage("/login"))
+                .logout(logoutConfigurer -> logoutConfigurer.logoutUrl("/logout"))
+                .authorizeHttpRequests(this::customiseRequest)
+                .build();
     }
 
     @SneakyThrows
     public void customiseRequest(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
-        registry.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasAnyRole(ADMIN.name())
-                .requestMatchers(new AntPathRequestMatcher("/**")).hasAnyRole(USER.name(), ADMIN.name())
-                .and()
-                .formLogin().permitAll()
-                .and()
-                .logout().logoutUrl("/logout");
+        registry.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole(ADMIN.name())
+                .requestMatchers(new AntPathRequestMatcher("/**")).hasAnyRole(USER.name(), ADMIN.name());
     }
 
     @Bean
@@ -43,6 +44,7 @@ public class SecurityConfig {
         return configuration.getAuthenticationManager();
 
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

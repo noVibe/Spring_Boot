@@ -22,7 +22,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .map(userMapper::toDto)
                 .orElseThrow(() -> new UsernameNotFoundException("No user with login " + username));
         userDetails.setUserDTO(userDto);
-        System.out.println(userDto);
         return userDetails;
     }
 }
