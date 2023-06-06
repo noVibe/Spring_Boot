@@ -26,7 +26,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .addFilter(new DefaultLoginPageGeneratingFilter(new UsernamePasswordAuthenticationFilter()))
-                .formLogin(loginConfigurer -> loginConfigurer.loginPage("/login"))
+                .formLogin(loginConfigurer -> loginConfigurer.loginPage("/login").permitAll())
                 .logout(logoutConfigurer -> logoutConfigurer.logoutUrl("/logout"))
                 .authorizeHttpRequests(this::customiseRequest)
                 .build();

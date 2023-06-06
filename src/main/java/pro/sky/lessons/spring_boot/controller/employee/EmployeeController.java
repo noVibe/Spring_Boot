@@ -17,15 +17,9 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-    @PostMapping("/add")
-    public void addNewEmployees(@RequestBody EmployeeInDTO... employees) {
-        employeeService.addEmployee(employees);
-    }
 
-    @PutMapping("/{id}")
-    public void editEmployee(@PathVariable long id, @RequestBody EmployeeInDTO employee) {
-        employeeService.updateEmployee(id, employee);
-    }
+
+
 
     @GetMapping("/{id}")
     public EmployeeView getEmployee(@PathVariable int id) {
@@ -46,10 +40,7 @@ public class EmployeeController {
     public List<EmployeeOutDTO> getEmployeesOlderThan(@RequestParam (name = "age") int age) {
         return employeeService.getEmployeesOlderThan(age);
     }
-    @DeleteMapping("/{id}")
-    public void deleteEmployeeById(@PathVariable int id) {
-        employeeService.deleteEmployee(id);
-    }
+
 
     @GetMapping("/youngest")
     public List<EmployeeOutDTO> getYoungestEmployee() {

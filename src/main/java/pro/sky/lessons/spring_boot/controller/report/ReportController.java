@@ -16,10 +16,7 @@ public class ReportController {
         this.reportService = reportService;
     }
 
-    @PostMapping(value = "")
-    public long generateReport() {
-        return reportService.generateReport();
-    }
+
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Resource> getReport(@PathVariable(name = "id") long id) {
