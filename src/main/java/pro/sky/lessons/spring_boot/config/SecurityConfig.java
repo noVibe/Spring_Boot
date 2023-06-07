@@ -3,7 +3,9 @@ package pro.sky.lessons.spring_boot.config;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -12,8 +14,6 @@ import org.springframework.security.config.annotation.web.configurers.AuthorizeH
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
@@ -25,9 +25,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
-                .addFilter(new DefaultLoginPageGeneratingFilter(new UsernamePasswordAuthenticationFilter()))
-                .formLogin(loginConfigurer -> loginConfigurer.loginPage("/login").permitAll())
-                .logout(logoutConfigurer -> logoutConfigurer.logoutUrl("/logout"))
+                .formLogin(Customizer.withDefaults())
+                .logout(Customizer.withDefaults())
+                .sessionManagement(Customizer.withDefaults())
+                .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(this::customiseRequest)
                 .build();
     }
@@ -35,7 +36,10 @@ public class SecurityConfig {
     @SneakyThrows
     public void customiseRequest(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
         registry.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole(ADMIN.name())
-                .requestMatchers(new AntPathRequestMatcher("/**")).hasAnyRole(USER.name(), ADMIN.name());
+                .requestMatchers(new AntPathRequestMatcher("/**")).hasAnyRole(USER.name(), ADMIN.name())
+                .requestMatchers(HttpMethod.DELETE).hasRole(ADMIN.name())
+                .requestMatchers(HttpMethod.POST).hasRole(ADMIN.name())
+                .requestMatchers(HttpMethod.PUT).hasRole(ADMIN.name());
     }
 
     @Bean

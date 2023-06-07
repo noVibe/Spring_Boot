@@ -21,6 +21,7 @@ public class UserDetailsImpl implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Optional.ofNullable(userDTO)
                 .map(UserDTO::getRole)
+                .map(role -> "ROLE_" + role)
                 .map(SimpleGrantedAuthority::new)
                 .map(Collections::singleton)
                 .orElseGet(Collections::emptySet);
