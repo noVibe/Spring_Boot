@@ -3,7 +3,6 @@ package pro.sky.lessons.spring_boot.config;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -36,10 +35,7 @@ public class SecurityConfig {
     @SneakyThrows
     public void customiseRequest(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
         registry.requestMatchers(new AntPathRequestMatcher("/admin/**")).hasRole(ADMIN.name())
-                .requestMatchers(new AntPathRequestMatcher("/**")).hasAnyRole(USER.name(), ADMIN.name())
-                .requestMatchers(HttpMethod.DELETE).hasRole(ADMIN.name())
-                .requestMatchers(HttpMethod.POST).hasRole(ADMIN.name())
-                .requestMatchers(HttpMethod.PUT).hasRole(ADMIN.name());
+                .requestMatchers(new AntPathRequestMatcher("/**")).hasAnyRole(USER.name(), ADMIN.name());
     }
 
     @Bean
