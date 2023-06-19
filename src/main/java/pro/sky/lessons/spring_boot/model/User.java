@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import pro.sky.lessons.spring_boot.enums.Role;
 
 @Entity
-@Table(name = "app_user")
+@Table(name = "users")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

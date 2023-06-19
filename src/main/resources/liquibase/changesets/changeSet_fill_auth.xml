@@ -1,0 +1,20 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="7" author="BV">
+        <preConditions>
+            <tableExists tableName="users"/>
+        </preConditions>
+        <insert tableName="users">
+            <column name="login" value="bob"/>
+            <column name="password" value="$2a$06$dqifb7dKAjh7q3v3cET4PuYKTuh7B2m9jiIK/kZRjPHiJxBNExqQ."/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+        <insert tableName="users">
+            <column name="login" value="bill"/>
+            <column name="password" value="$2a$06$dqifb7dKAjh7q3v3cET4PuYKTuh7B2m9jiIK/kZRjPHiJxBNExqQ."/>
+            <column name="role" value="USER"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

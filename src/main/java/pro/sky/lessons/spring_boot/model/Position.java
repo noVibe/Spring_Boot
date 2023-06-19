@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.List;
-
 @Entity
 @Data
 @NoArgsConstructor
@@ -18,9 +16,7 @@ public class Position {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "position_name")
+    @Column(name = "name")
     private String positionName;
 
-    @OneToMany(targetEntity = Employee.class)
-    private List<Employee> employeeList;
 }

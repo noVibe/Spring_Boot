@@ -29,5 +29,4 @@ public class Employee {
     @JoinColumn(name = "position_id")
     private Position position;
 
-
 }
