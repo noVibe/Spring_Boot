@@ -1,6 +1,8 @@
 package pro.sky.lessons.spring_boot.service.employee;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,7 +17,6 @@ import pro.sky.lessons.spring_boot.repository.employee.PagingEmployee;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
 
 @Service
 @AllArgsConstructor
@@ -59,12 +60,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeePaging.findAll(employeesOfPage).map(EmployeeOutDTO::fromEmployee).toList();
     }
 
-    private List<EmployeeOutDTO> fromEmployeeToDTOList(List<Employee> list) {
-        return list.stream()
-                .map(EmployeeOutDTO::fromEmployee)
-                .collect(Collectors.toList());
-    }
-
     @Override
     public List<EmployeeOutDTO> getEmployeesOlderThan(int age) {
         return fromEmployeeToDTOList(employeeRepository.findEmployeeByAgeIsAfter(age));
@@ -92,8 +87,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<EmployeeOutDTO> getAll() {
-        var list = new ArrayList<EmployeeOutDTO>();
-        employeeRepository.findAll().forEach(x -> list.add(EmployeeOutDTO.fromEmployee(x)));
-        return list;
+        return fromEmployeeToDTOList(employeeRepository.findAllEmployees());
+    }
+
+    private List<EmployeeOutDTO> fromEmployeeToDTOList(List<Employee> list) {
+        return list.stream()
+                .map(EmployeeOutDTO::fromEmployee)
+                .collect(Collectors.toList());
     }
 }
+
