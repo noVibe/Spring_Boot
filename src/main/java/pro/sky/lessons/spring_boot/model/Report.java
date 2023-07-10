@@ -16,11 +16,11 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Lob
-    @Column(name = "data")
-    private String data;
 
-    public Report(String data) {
+    @Column(name = "data", columnDefinition = "blob")
+    private byte[] data;
+
+    public Report(byte[] data) {
         this.data = data;
     }
 }

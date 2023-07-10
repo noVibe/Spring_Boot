@@ -2,23 +2,19 @@ package pro.sky.lessons.spring_boot.controller.employee;
 
 import org.springframework.web.bind.annotation.*;
 import pro.sky.lessons.spring_boot.abstraction.EmployeeService;
-import pro.sky.lessons.spring_boot.dto.employee_dto.EmployeeInDTO;
 import pro.sky.lessons.spring_boot.dto.employee_dto.EmployeeOutDTO;
 import pro.sky.lessons.spring_boot.projection.EmployeeView;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/employees")
+@RequestMapping("/employee")
 public class EmployeeController {
     private final EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-
-
-
 
 
     @GetMapping("/{id}")
@@ -37,7 +33,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/olderThan")
-    public List<EmployeeOutDTO> getEmployeesOlderThan(@RequestParam (name = "age") int age) {
+    public List<EmployeeOutDTO> getEmployeesOlderThan(@RequestParam(name = "age") int age) {
         return employeeService.getEmployeesOlderThan(age);
     }
 

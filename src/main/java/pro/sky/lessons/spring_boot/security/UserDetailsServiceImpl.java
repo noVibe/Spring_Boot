@@ -5,9 +5,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import pro.sky.lessons.spring_boot.converter.UserMapper;
 import pro.sky.lessons.spring_boot.dto.UserDTO;
 import pro.sky.lessons.spring_boot.repository.UserRepository;
-import converter.UserMapper;
 
 @Service
 @AllArgsConstructor

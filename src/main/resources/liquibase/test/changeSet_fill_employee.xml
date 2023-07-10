@@ -1,0 +1,59 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="7" author="BV">
+        <preConditions>
+            <tableExists tableName="position"/>
+        </preConditions>
+        <insert tableName="employee">
+            <column name="first_name" value="Bob"/>
+            <column name="last_name" value="Bober"/>
+            <column name="gender" value="male"/>
+            <column name="age" value="22"/>
+            <column name="position_id" value="1"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="first_name" value="Bill"/>
+            <column name="last_name" value="Biller"/>
+            <column name="gender" value="male"/>
+            <column name="age" value="40"/>
+            <column name="position_id" value="3"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="first_name" value="Dan"/>
+            <column name="last_name" value="Daner"/>
+            <column name="gender" value="male"/>
+            <column name="age" value="33"/>
+            <column name="position_id" value="3"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="first_name" value="Jack"/>
+            <column name="last_name" value="Jacker"/>
+            <column name="gender" value="male"/>
+            <column name="age" value="25"/>
+            <column name="position_id" value="2"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="first_name" value="Mark"/>
+            <column name="last_name" value="Marker"/>
+            <column name="gender" value="male"/>
+            <column name="age" value="51"/>
+            <column name="position_id" value="4"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="first_name" value="March"/>
+            <column name="last_name" value="Marcher"/>
+            <column name="gender" value="female"/>
+            <column name="age" value="22"/>
+            <column name="position_id" value="4"/>
+        </insert>
+        <insert tableName="employee">
+            <column name="first_name" value="Alice"/>
+            <column name="last_name" value="Alicer"/>
+            <column name="gender" value="male"/>
+            <column name="age" value="30"/>
+            <column name="position_id" value="5"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -1,7 +1,11 @@
 package pro.sky.lessons.spring_boot.repository.position;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import pro.sky.lessons.spring_boot.model.Position;
 
-public interface PositionRepository extends CrudRepository<Position, Long> {
+import java.util.Collection;
+
+public interface PositionRepository extends JpaRepository<Position, Long> {
+    boolean existsPositionsByPositionName(String name);
+    boolean existsByPositionNameIn(Collection<String> positionName);
 }

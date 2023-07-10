@@ -32,4 +32,4 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
     List<Employee> findEmployeeByAgeIsAfter(int age);
 
-}
+  }

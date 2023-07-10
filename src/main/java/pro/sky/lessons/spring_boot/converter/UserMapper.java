@@ -1,4 +1,4 @@
-package converter;
+package pro.sky.lessons.spring_boot.converter;
 
 import org.springframework.stereotype.Component;
 import pro.sky.lessons.spring_boot.dto.UserDTO;

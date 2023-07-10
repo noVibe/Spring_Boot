@@ -1,11 +1,10 @@
 package pro.sky.lessons.spring_boot.service.employee;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pro.sky.lessons.spring_boot.abstraction.EmployeeService;
 import pro.sky.lessons.spring_boot.dto.employee_dto.EmployeeInDTO;
 import pro.sky.lessons.spring_boot.dto.employee_dto.EmployeeOutDTO;
@@ -14,8 +13,10 @@ import pro.sky.lessons.spring_boot.model.Employee;
 import pro.sky.lessons.spring_boot.projection.EmployeeView;
 import pro.sky.lessons.spring_boot.repository.employee.EmployeeRepository;
 import pro.sky.lessons.spring_boot.repository.employee.PagingEmployee;
+import pro.sky.lessons.spring_boot.repository.position.PositionRepository;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final PagingEmployee employeePaging;
+    private final PositionRepository positionRepository;
 
     @Override
     public void addEmployee(EmployeeInDTO[] employees) {
@@ -30,9 +32,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void updateEmployee(long id, EmployeeInDTO employee) {
-        employeeRepository.findById(id).orElseThrow(IdNotFound::new);
-        employeeRepository.save(employee.toEmployee().setId(id));
+    @Transactional
+    public void updateEmployee(long id, EmployeeInDTO dto) {
+        Employee employee = employeeRepository.findById(id).orElseThrow(IdNotFound::new);
+        employeeRepository.save(employee
+                .setFirstName(dto.getFirstName())
+                .setLastName(dto.getLastName())
+                .setGender(dto.getGender())
+                .setAge(dto.getAge())
+                .setCityId(dto.getCityId())
+                .setPosition(positionRepository.findById(dto.getPositionId()).orElseThrow(IdNotFound::new)));
     }
 
     @Override

@@ -7,12 +7,13 @@ import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import pro.sky.lessons.spring_boot.abstraction.ReportService;
-import pro.sky.lessons.spring_boot.projection.ReportView;
 import pro.sky.lessons.spring_boot.exceptions.IdNotFound;
 import pro.sky.lessons.spring_boot.model.Report;
+import pro.sky.lessons.spring_boot.projection.ReportView;
 import pro.sky.lessons.spring_boot.repository.report.ReportGeneratorRepository;
 import pro.sky.lessons.spring_boot.repository.report.ReportRepository;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Service
@@ -24,7 +25,7 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public long generateReport() {
-        Report report = new Report(getJSON());
+        Report report = new Report(getJSON().getBytes(StandardCharsets.UTF_8));
         reportRepository.save(report);
         return report.getId();
     }
@@ -32,7 +33,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public Resource getReport(long id) {
         Report report = reportRepository.findById(id).orElseThrow(IdNotFound::new);
-        return new ByteArrayResource(report.getData().getBytes());
+        return new ByteArrayResource(report.getData());
     }
 
 

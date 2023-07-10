@@ -38,17 +38,17 @@ class ReportServiceImplTest {
         when(mapper.writeValueAsString(REPORT_VIEW_LIST))
                 .thenReturn(REPORT_DATA);
         when(reportRepository.save(any()))
-                .thenReturn(new Report(REPORT_DATA));
+                .thenReturn(new Report(REPORT_DATA.getBytes()));
         assertEquals(0, out.generateReport());
     }
 
     @Test
     void getReport() {
-        Report report = new Report(REPORT_DATA);
+        Report report = new Report(REPORT_DATA.getBytes());
         when(reportRepository.findById(anyLong()))
                 .thenReturn(Optional.of(new Report()));
        var actual = out.getReport(anyLong());
-       var expected = new ByteArrayResource(report.getData().getBytes());
+       var expected = new ByteArrayResource(report.getData());
        assertEquals(expected, actual);
     }
 }

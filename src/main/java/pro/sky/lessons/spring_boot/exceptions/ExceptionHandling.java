@@ -23,4 +23,8 @@ public class ExceptionHandling {
     ResponseEntity<?> handleNoIdFoundException(IdNotFound e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
+    @ExceptionHandler
+    ResponseEntity<?> handleAlreadyExists(AlreadyExistsException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+    }
 }

@@ -2,8 +2,8 @@ package pro.sky.lessons.spring_boot.repository.report;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import pro.sky.lessons.spring_boot.projection.ReportView;
 import pro.sky.lessons.spring_boot.model.Employee;
+import pro.sky.lessons.spring_boot.projection.ReportView;
 
 import java.util.List;
 

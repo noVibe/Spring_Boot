@@ -1,0 +1,25 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="7" author="BV">
+        <preConditions>
+            <tableExists tableName="position"/>
+        </preConditions>
+        <insert tableName="position">
+            <column name="name" value="QA"/>
+        </insert>
+        <insert tableName="position">
+            <column name="name" value="Developer"/>
+        </insert>
+        <insert tableName="position">
+            <column name="name" value="Manager"/>
+        </insert>
+        <insert tableName="position">
+            <column name="name" value="Director"/>
+        </insert>
+        <insert tableName="position">
+            <column name="name" value="Tech-Lead"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

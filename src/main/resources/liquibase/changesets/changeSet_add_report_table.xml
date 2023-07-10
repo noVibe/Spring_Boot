@@ -11,7 +11,7 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="data" type="oid">
+            <column name="data" type="bytea">
                 <constraints nullable="false"/>
             </column>
         </createTable>
