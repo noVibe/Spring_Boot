@@ -25,7 +25,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @WithMockUser(roles = {"ADMIN"})
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
 class PositionControllerTest {
 
     @Autowired
